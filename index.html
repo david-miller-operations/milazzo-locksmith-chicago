@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Local Services - Chicago Loop</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+        body {
+            background-color: #f8f9fa;
+            color: #212529;
+            line-height: 1.6;
+        }
+        header {
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: #ffffff;
+            padding: 30px 20px;
+            text-align: center;
+            border-bottom: 5px solid #ff9f43;
+        }
+        header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        header p {
+            font-size: 1rem;
+            color: #f1f2f6;
+            font-weight: 300;
+        }
+        .container {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .emergency-banner {
+            background-color: #ffda79;
+            border-left: 5px solid #cc8e35;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+        }
+        .cta-call-button {
+            display: block;
+            background-color: #10ac84;
+            color: #ffffff;
+            text-align: center;
+            padding: 18px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(16, 172, 132, 0.4);
+            margin-bottom: 25px;
+            transition: background 0.3s;
+        }
+        .cta-call-button:active {
+            background-color: #0ca07a;
+        }
+        .card {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+        .card h2 {
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+            color: #2c3e50;
+            border-bottom: 2px solid #f1f2f6;
+            padding-bottom: 5px;
+        }
+        .feature-list {
+            list-style: none;
+        }
+        .feature-list li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+            font-size: 0.95rem;
+        }
+        .feature-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #10ac84;
+            font-weight: bold;
+        }
+        .quote-form input, .quote-form textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 12px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        .quote-form button {
+            width: 100%;
+            background-color: #2c3e50;
+            color: white;
+            border: none;
+            padding: 14px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            font-size: 0.85rem;
+            color: #7f8c8d;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1 id="biz-name">MILAZZO LOCK & SECURITY</h1>
+        <p>Professional Local Services • Chicago Loop & Surrounding Areas</p>
+    </header>
+
+    <div class="container">
+        
+        <div class="emergency-banner">
+            ⚡ Need Immediate Dispatch? We Are Active 24/7.
+        </div>
+
+        <a href="tel:3123139477" id="biz-phone" class="cta-call-button">
+            📞 Tap to Call: (312) 313-9477
+        </a>
+
+        <div class="card">
+            <h2>Why Choose Our Team?</h2>
+            <ul class="feature-list">
+                <li>Rapid Response Deployment Across Chicago Core</li>
+                <li>Fully Licensed, Bonded, and Verified Local Technicians</li>
+                <li>Flawless 5-Star Service & Transparent Local Rates</li>
+                <li>Comprehensive Emergency and Structural Solutions</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>Request an Instant Mobile Quote</h2>
+            <form id="lead-form" class="quote-form" method="POST">
+                <input type="hidden" name="access_key" value="c611e09f-f0e8-4466-8eac-3ed3f1da5b67">
+                <input type="text" name="Customer_Name" placeholder="Your Name" required>
+                <input type="tel" name="Customer_Phone" placeholder="Your Phone Number" required>
+                <textarea name="Service_Requested" rows="3" placeholder="Describe the service required (e.g., Emergency lockout, roof leak assessment)" required></textarea>
+                <button type="submit" id="submit-btn">Submit Request</button>
+            </form>
+            <div id="success-msg" style="display: none; text-align: center; color: #10ac84; font-weight: bold; padding: 15px;">
+                🎉 Request Submitted Successfully! Our coordinator will contact you shortly.
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>© 2026 Chicago Operations Node. All rights reserved.</p>
+        <p>30 W Randolph St, Chicago, Illinois, 60601</p>
+    </footer>
+
+    <script>
+        const form = document.getElementById('lead-form');
+        const successMsg = document.getElementById('success-msg');
+        const submitBtn = document.getElementById('submit-btn');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            submitBtn.innerText = "Sending...";
+            submitBtn.disabled = true;
+
+            const formData = new FormData(form);
+            const object = Object.fromEntries(formData);
+            const json = JSON.stringify(object);
+
+            fetch('https://web3forms.com', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: json
+            })
+            .then(async (response) => {
+                if (response.status == 200) {
+                    form.style.display = 'none';
+                    successMsg.style.display = 'block';
+                } else {
+                    submitBtn.innerText = "Error, Try Again";
+                    submitBtn.disabled = false;
+                }
+            })
+            .catch(error => {
+                submitBtn.innerText = "Error, Try Again";
+                submitBtn.disabled = false;
+            });
+        });
+    </script>
+
+</body>
+</html>
