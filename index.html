@@ -154,16 +154,23 @@
 
         <div class="card">
             <h2>Request an Instant Mobile Quote</h2>
-            <form id="lead-form" class="quote-form" method="POST">
+            
+            <!-- DIRECT PURE HTML WEB3FORMS CONTROLLER -->
+            <form action="https://api.web3forms.com/submit" method="POST" class="quote-form">
+                
+                <!-- Your Live Verified API Routing Token -->
                 <input type="hidden" name="access_key" value="c611e09f-f0e8-4466-8eac-3ed3f1da5b67">
-                <input type="text" name="Customer_Name" placeholder="Your Name" required>
-                <input type="tel" name="Customer_Phone" placeholder="Your Phone Number" required>
-                <textarea name="Service_Requested" rows="3" placeholder="Describe the service required (e.g., Emergency lockout, roof leak assessment)" required></textarea>
-                <button type="submit" id="submit-btn">Submit Request</button>
+                
+                <!-- Tells the network to drop them onto a clean submission confirmation page -->
+                <input type="hidden" name="redirect" value="https://web3forms.com">
+
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="tel" name="phone" placeholder="Your Phone Number" required>
+                <textarea name="message" rows="3" placeholder="Describe the service required (e.g., Emergency lockout, roof leak assessment)" required></textarea>
+                
+                <button type="submit">Submit Request</button>
             </form>
-            <div id="success-msg" style="display: none; text-align: center; color: #10ac84; font-weight: bold; padding: 15px;">
-                🎉 Request Submitted Successfully! Our coordinator will contact you shortly.
-            </div>
+            
         </div>
 
     </div>
@@ -172,45 +179,6 @@
         <p>© 2026 Chicago Operations Node. All rights reserved.</p>
         <p>30 W Randolph St, Chicago, Illinois, 60601</p>
     </footer>
-
-    <script>
-        const form = document.getElementById('lead-form');
-        const successMsg = document.getElementById('success-msg');
-        const submitBtn = document.getElementById('submit-btn');
-
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            submitBtn.innerText = "Sending...";
-            submitBtn.disabled = true;
-
-            const formData = new FormData(form);
-            const object = Object.fromEntries(formData);
-            const json = JSON.stringify(object);
-
-            /* CORRECTED SERVER ENDPOINT LINK BELOW */
-            fetch('https://web3forms.com', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: json
-            })
-            .then(async (response) => {
-                if (response.status == 200) {
-                    form.style.display = 'none';
-                    successMsg.style.display = 'block';
-                } else {
-                    submitBtn.innerText = "Error, Try Again";
-                    submitBtn.disabled = false;
-                }
-            })
-            .catch(error => {
-                submitBtn.innerText = "Error, Try Again";
-                submitBtn.disabled = false;
-            });
-        });
-    </script>
 
 </body>
 </html>
